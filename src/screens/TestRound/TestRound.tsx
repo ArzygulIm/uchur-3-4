@@ -49,9 +49,10 @@ function shuffle<T>(arr: T[]): T[] {
 
 /* ---------- ВОПРОСЫ (добавляй сколько хочешь) ---------- */
 const RAW_QUESTIONS: RawQuestion[] = [
+  // 🔢 Сандык суроолор (1–10)
   {
     id: 1,
-    text: "8 × 7 = ?",
+    text: "8 менен 7нин көбөйтүндүсүн тап",
     options: [
       { kind: "text", text: "54", correct: false },
       { kind: "text", text: "56", correct: true },
@@ -60,39 +61,567 @@ const RAW_QUESTIONS: RawQuestion[] = [
   },
   {
     id: 2,
-    text: "72 ÷ 8 = ?",
+    text: "8 менен 7нин суммасын тап",
     options: [
-      { kind: "text", text: "8", correct: false },
-      { kind: "text", text: "9", correct: true },
-      { kind: "text", text: "7", correct: false },
+      { kind: "text", text: "14", correct: false },
+      { kind: "text", text: "15", correct: true },
+      { kind: "text", text: "16", correct: false },
     ],
   },
   {
     id: 3,
-    text: "Выбери картинку с квадратом",
-    imageSrc: "/quiz/question-square.png",
+    text: "8 менен 7нин айырмасын тап",
     options: [
-      { kind: "image", src: "/quiz/opt-circle.png", alt: "circle", correct: false },
-      { kind: "image", src: "/quiz/opt-square.png", alt: "square", correct: true },
-      { kind: "image", src: "/quiz/opt-triangle.png", alt: "triangle", correct: false },
+      { kind: "text", text: "1", correct: true },
+      { kind: "text", text: "15", correct: false },
+      { kind: "text", text: "56", correct: false },
     ],
   },
   {
     id: 4,
-    text: "81 ÷ 9 = ?",
+    text: "8ди 7ге бөлгөндө тийиндиси канча?",
     options: [
-      { kind: "text", text: "9", correct: true },
-      { kind: "text", text: "8", correct: false },
+      { kind: "text", text: "1", correct: true },
       { kind: "text", text: "7", correct: false },
+      { kind: "text", text: "15", correct: false },
     ],
   },
   {
     id: 5,
-    text: "6 × 9 = ?",
+    text: "7 менен 8нин көбөйтүндүсүн тап",
     options: [
-      { kind: "text", text: "54", correct: true },
+      { kind: "text", text: "56", correct: true },
+      { kind: "text", text: "54", correct: false },
+      { kind: "text", text: "64", correct: false },
+    ],
+  },
+  {
+    id: 6,
+    text: "7 менен 8нин суммасын тап",
+    options: [
+      { kind: "text", text: "14", correct: false },
+      { kind: "text", text: "15", correct: true },
+      { kind: "text", text: "16", correct: false },
+    ],
+  },
+  {
+    id: 7,
+    text: "7 менен 8нин айырмасын тап",
+    options: [
+      { kind: "text", text: "1", correct: true },
+      { kind: "text", text: "15", correct: false },
       { kind: "text", text: "56", correct: false },
-      { kind: "text", text: "49", correct: false },
+    ],
+  },
+  {
+    id: 8,
+    text: "7ни 8ге бөлгөндө тийиндиси канча?",
+    options: [
+      { kind: "text", text: "0", correct: true },
+      { kind: "text", text: "1", correct: false },
+      { kind: "text", text: "7", correct: false },
+    ],
+  },
+  {
+    id: 9,
+    text: "8 × 7 = ?",
+    options: [
+      { kind: "text", text: "48", correct: false },
+      { kind: "text", text: "56", correct: true },
+      { kind: "text", text: "64", correct: false },
+    ],
+  },
+  {
+    id: 10,
+    text: "8 + 7 = ?",
+    options: [
+      { kind: "text", text: "14", correct: false },
+      { kind: "text", text: "15", correct: true },
+      { kind: "text", text: "16", correct: false },
+    ],
+  },
+
+  // 📐 Бурчтар (11–20)
+  {
+    id: 11,
+    text: "Кайсысы тар бурч?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар бурч",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен бурч",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик бурч",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 12,
+    text: "Кайсысы кен бурч?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен бурч",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар бурч",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик бурч",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 13,
+    text: "Тик бурчту танда",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик бурч",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен бурч",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар бурч",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 14,
+    text: "Жайылган бурч кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/jaiylgan.png",
+        alt: "жайылган бурч",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик бурч",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар бурч",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 15,
+    text: "90° бурчту тап",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 16,
+    text: "90°тан кичине бурч кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 17,
+    text: "90°тан чоң бурч кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 18,
+    text: "Түз сызыкка барабар бурч кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/jaiylgan.png",
+        alt: "жайылган",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 19,
+    text: "Кайсысы тар бурч ЭМЕС?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 20,
+    text: "Кайсысы тик бурч ЭМЕС?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/angles/tar.png",
+        alt: "тар",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/tik.png",
+        alt: "тик",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/angles/ken.png",
+        alt: "кен",
+        correct: false,
+      },
+    ],
+  },
+
+  // 🔺 Фигуралар (21–30)
+  {
+    id: 21,
+    text: "Квадратты тап",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 22,
+    text: "Үч бурчтукту тап",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 23,
+    text: "Тик бурчтукту тап",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 24,
+    text: "Төрт бурчу тең фигура кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 25,
+    text: "Үч тарабы бар фигура кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 26,
+    text: "Квадрат ЭМЕС фигураны тап",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 27,
+    text: "Тик бурчтук кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 28,
+    text: "Үч бурчтук ЭМЕС фигураны тап",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 29,
+    text: "Төрт бурчтуу фигура кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: false,
+      },
+    ],
+  },
+  {
+    id: 30,
+    text: "Үч бурчтуу фигура кайсы?",
+    options: [
+      {
+        kind: "image",
+        src: "/images/figures/uch.png",
+        alt: "үч бурчтук",
+        correct: true,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/tik.png",
+        alt: "тик бурчтук",
+        correct: false,
+      },
+      {
+        kind: "image",
+        src: "/images/figures/kvadrat.png",
+        alt: "квадрат",
+        correct: false,
+      },
     ],
   },
 ];
@@ -124,7 +653,9 @@ export default function TestRound({
   setGameState,
   onComplete,
 }: TestRoundProps) {
-  const [questions, setQuestions] = useState<QuestionPrepared[]>(() => prepareQuestions());
+  const [questions, setQuestions] = useState<QuestionPrepared[]>(() =>
+    prepareQuestions(),
+  );
   const [index, setIndex] = useState(0);
 
   const [answered1, setAnswered1] = useState(false);
@@ -205,7 +736,12 @@ export default function TestRound({
     opt.kind === "text" ? (
       <span className="opt-text">{opt.text}</span>
     ) : (
-      <img className="opt-img" src={opt.src} alt={opt.alt ?? ""} draggable={false} />
+      <img
+        className="opt-img"
+        src={opt.src}
+        alt={opt.alt ?? ""}
+        draggable={false}
+      />
     );
 
   const team1HasImages = q.optionsTeam1.some((o) => o.kind === "image");
@@ -241,7 +777,9 @@ export default function TestRound({
         <div className={`team-panel blue ${winner === 1 ? "win" : ""}`}>
           <div className="team-badge">Team 1</div>
 
-          <div className={`options three ${team1HasImages ? "has-images" : ""}`}>
+          <div
+            className={`options three ${team1HasImages ? "has-images" : ""}`}
+          >
             {q.optionsTeam1.map((opt, i) => (
               <button
                 key={i}
@@ -259,7 +797,9 @@ export default function TestRound({
         <div className={`team-panel orange ${winner === 2 ? "win" : ""}`}>
           <div className="team-badge">Team 2</div>
 
-          <div className={`options three ${team2HasImages ? "has-images" : ""}`}>
+          <div
+            className={`options three ${team2HasImages ? "has-images" : ""}`}
+          >
             {q.optionsTeam2.map((opt, i) => (
               <button
                 key={i}
@@ -275,8 +815,8 @@ export default function TestRound({
       </div>
 
       <div className="progress">
-        Вопрос {index + 1} из {questions.length} • Первый правильный +{POINTS} • Счёт:{" "}
-        {gameState.scores.team1} — {gameState.scores.team2}
+        Вопрос {index + 1} из {questions.length} • Первый правильный +{POINTS} •
+        Счёт: {gameState.scores.team1} — {gameState.scores.team2}
       </div>
 
       {/* ✅ МОДАЛКА ПОСЛЕ 3 ВОПРОСА */}

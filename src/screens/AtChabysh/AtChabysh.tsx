@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { GameState } from "../../App";
 import "./AtChabysh.css";
 
-// ✅ путь к файлу: src/audio/atChabysh.mp3
+// ✅ файлдын жолу: src/audio/atChabysh.mp3
 import atChabyshAudio from "../../audio/atChabysh.mp3";
 
 interface AtChabyshProps {
@@ -16,12 +16,12 @@ const TIMER_ENABLED = true;
 
 type Scores = { team1: number; team2: number };
 
-// === ДОЛЖНО СОВПАДАТЬ С CSS ===
-const FINISH_TOP = 60;   // .finish-line { top: 60px }
-const FINISH_H = 20;     // .finish-line height
+// === CSS МЕНЕН БИРДЕЙ БОЛУШУ КЕРЕК ===
+const FINISH_TOP = 60; // .finish-line { top: 60px }
+const FINISH_H = 20; // .finish-line бийиктиги
 
-const SAFE_PAD = 8;      // запас
-const HORSE_H = 70;      // примерная высота horse (label+emoji). если надо: 60..85
+const SAFE_PAD = 8; // коопсуз запас
+const HORSE_H = 70; // лошадканын болжолдуу бийиктиги (жазуу + emoji). керек болсо 60..85
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 
@@ -29,10 +29,10 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const [raceStarted, setRaceStarted] = useState(false);
 
-  // ✅ очки текущего заезда (двигают лошадок)
+  // ✅ ушул жарыштагы упайлар (лошадканы жылдырат)
   const [roundScores, setRoundScores] = useState<Scores>({ team1: 0, team2: 0 });
 
-  // 🧊 фиксируем итог заезда на финише, чтобы не было "прыжков"
+  // 🧊 финиште ушул жарыштын упайын “тоңдурабыз”, лошадка “секирип” кетпесин
   const [finalRoundScores, setFinalRoundScores] = useState<Scores | null>(null);
 
   const [team1Input, setTeam1Input] = useState("");
@@ -60,23 +60,23 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
   useEffect(() => {
     if (!audioRef.current) return;
 
-    // ▶️ играет только во время активного заезда
+    // ▶️ жарыш жүрүп жатканда гана ойнойт
     if (raceStarted && timeLeft > 0) {
       audioRef.current.play().catch(() => {});
       return;
     }
 
-    // ⏸ стоп на финише/до старта
+    // ⏸ финиште/стартка чейин токтойт
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
   }, [raceStarted, timeLeft]);
 
-  /* ---------- Генерация примера ---------- */
+  /* ---------- Мисал түзүү ---------- */
   const generate = () => {
     const isDiv = Math.random() > 0.4;
 
     if (isDiv) {
-      const b = Math.floor(Math.random() * 8) + 2;   // 2..9
+      const b = Math.floor(Math.random() * 8) + 2; // 2..9
       const res = Math.floor(Math.random() * 8) + 2; // 2..9
       return { q: `${b * res} ÷ ${b}`, a: res };
     }
@@ -86,7 +86,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     return { q: `${a} × ${b}`, a: a * b };
   };
 
-  /* ---------- Дорожки: измеряем высоту (для пиксельного движения) ---------- */
+  /* ---------- Дорожканын бийиктигин өлчөйбүз (пиксел менен жылдыруу үчүн) ---------- */
   const leftTrackRef = useRef<HTMLDivElement | null>(null);
   const rightTrackRef = useRef<HTMLDivElement | null>(null);
   const [trackH, setTrackH] = useState<number>(0);
@@ -111,13 +111,13 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     };
   }, []);
 
-  /* ---------- Инициализация примеров ---------- */
+  /* ---------- Баштапкы мисалдар ---------- */
   useEffect(() => {
     setProb1(generate());
     setProb2(generate());
   }, []);
 
-  /* ---------- Таймер (только после старта) ---------- */
+  /* ---------- Таймер (старттан кийин гана) ---------- */
   useEffect(() => {
     if (!TIMER_ENABLED || !raceStarted) return;
 
@@ -128,7 +128,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     return () => clearInterval(timer);
   }, [raceStarted]);
 
-  /* ---------- Заморозка результата заезда при timeLeft=0 ---------- */
+  /* ---------- timeLeft=0 болгондо ушул жарыштын упайын тоңдурабыз ---------- */
   useEffect(() => {
     if (timeLeft !== 0) return;
     if (finalRoundScores) return;
@@ -159,7 +159,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     }
   };
 
-  /* ---------- Проверка ответа ---------- */
+  /* ---------- Жоопту текшерүү ---------- */
   const checkAnswer = (team: 1 | 2) => {
     const input = team === 1 ? team1Input : team2Input;
     const prob = team === 1 ? prob1 : prob2;
@@ -170,21 +170,19 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     const parsed = parseInt(input, 10);
 
     if (!Number.isNaN(parsed) && parsed === prob.a) {
-      // ✅ 1) общий счёт команды (копится между заездами)
+      // ✅ 1) жалпы упай (ар бир жарыштан кийин кошулуп турат)
       setGameState((prev) => ({
         ...prev,
         scores: {
           ...prev.scores,
-          [`team${team}`]:
-            prev.scores[team === 1 ? "team1" : "team2"] + 10,
+          [`team${team}`]: prev.scores[team === 1 ? "team1" : "team2"] + 10,
         },
       }));
 
-      // ✅ 2) очки заезда (двигают лошадку)
+      // ✅ 2) ушул жарыштын упайы (лошадканы жылдырат)
       setRoundScores((prev) => ({
         ...prev,
-        [team === 1 ? "team1" : "team2"]:
-          prev[team === 1 ? "team1" : "team2"] + 10,
+        [team === 1 ? "team1" : "team2"]: prev[team === 1 ? "team1" : "team2"] + 10,
       }));
 
       setProb(generate());
@@ -193,25 +191,25 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     setInput("");
   };
 
-  /* ---------- Позиция лошадки (в пикселях, чтобы финиш не пересекали раньше) ---------- */
+  /* ---------- Лошадканын орду (пиксел менен) ---------- */
   const calculateBottomPx = (score: number, team: 1 | 2) => {
     if (trackH <= 0) return `${SAFE_PAD}px`;
 
     const startBottomPx = SAFE_PAD;
 
-    // До финиша: лошадка не должна пересекать finish-line
+    // Финишке чейин: лошадка finish-line'ды убакыт бүтө электе кесип өтпөсүн
     // horseTop = trackH - bottom - HORSE_H
-    // нужно horseTop >= FINISH_TOP + FINISH_H + SAFE_PAD
+    // керек: horseTop >= FINISH_TOP + FINISH_H + SAFE_PAD
     const maxBeforeFinishPx = trackH - HORSE_H - (FINISH_TOP + FINISH_H + SAFE_PAD);
     const safeBefore = clamp(maxBeforeFinishPx, 20, trackH);
 
-    // За финишем (победитель на 0 секунде)
+    // Фиништен өтүү (жеңүүчү timeLeft=0 болгондо гана)
     const maxAfterFinishPx = trackH - HORSE_H - SAFE_PAD;
     const safeAfter = clamp(maxAfterFinishPx, safeBefore, trackH);
 
     if (!raceStarted) return `${startBottomPx}px`;
 
-    // Финиш — только когда timeLeft=0
+    // Финиш — таймер 0 болгондо гана
     if (timeLeft === 0 && finalRoundScores) {
       const s1 = finalRoundScores.team1;
       const s2 = finalRoundScores.team2;
@@ -220,9 +218,9 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
       return isWinner ? `${safeAfter}px` : `${safeBefore}px`;
     }
 
-    // В игре: время + бонус очков, но clamp до safeBefore
+    // Оюн жүрүп жатканда: убакыт + упай бонусу, бирок safeBefore'ден ашпайт
     const progressTime = (TOTAL_TIME - timeLeft) / TOTAL_TIME; // 0..1
-    const bonus = clamp((score / 10) * 0.03, 0, 0.4);          // каждые 10 очков ~ +0.03
+    const bonus = clamp((score / 10) * 0.03, 0, 0.4); // ар 10 упай ~ +0.03
 
     const progress = clamp(progressTime * 0.75 + bonus, 0, 1);
     const bottomPx = startBottomPx + progress * (safeBefore - startBottomPx);
@@ -230,7 +228,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     return `${bottomPx}px`;
   };
 
-  /* ---------- Тексты модалки ---------- */
+  /* ---------- Модалкадагы тексттер ---------- */
   const winnerText = useMemo(() => {
     const s1 = finalRoundScores ? finalRoundScores.team1 : roundScores.team1;
     const s2 = finalRoundScores ? finalRoundScores.team2 : roundScores.team2;
@@ -250,7 +248,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     return `Жалпы балл: ${gameState.scores.team1} — ${gameState.scores.team2}`;
   }, [gameState.scores.team1, gameState.scores.team2]);
 
-  /* ---------- След. ученики (новый заезд) ---------- */
+  /* ---------- Кийинки окуучулар (жаңы жарыш) ---------- */
   const nextStudents = () => {
     setFinalRoundScores(null);
     setRoundScores({ team1: 0, team2: 0 });
@@ -261,11 +259,11 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     setProb1(generate());
     setProb2(generate());
 
-    // сразу стартуем новый заезд
+    // жаңы жарышты дароо баштайбыз
     setRaceStarted(true);
   };
 
-  /* ---------- Первый старт ---------- */
+  /* ---------- Биринчи баштоо ---------- */
   const firstStart = () => {
     setFinalRoundScores(null);
     setRoundScores({ team1: 0, team2: 0 });
@@ -314,47 +312,48 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
         {TIMER_ENABLED && <div className="timer-box">Убакыт: {timeLeft}</div>}
 
         {!raceStarted && (
-          <button
-            onClick={firstStart}
-            className="start-btn"
-          >
-            🚦 Старт
+          <button onClick={firstStart} className="start-btn">
+            🚦 Баштоо
           </button>
         )}
 
-        {/* Левая дорожка */}
+        {/* Сол дорожка */}
         <div className="track" ref={leftTrackRef}>
           <div className="finish-line" />
           <div className="horse" style={{ bottom: calculateBottomPx(roundScores.team1, 1) }}>
-            <span className="horse-label" style={{ color: "#3b82f6" }}>3-класс</span>
+            <span className="horse-label" style={{ color: "#3b82f6" }}>
+              3-класс
+            </span>
             🐎
           </div>
         </div>
 
-        {/* Команда 1 */}
+        {/* 1-команда */}
         <div className="play-area area-blue">
           <div className="question">{prob1.q}</div>
           <div className="screen">{team1Input}</div>
           <Numpad team={1} />
         </div>
 
-        {/* Команда 2 */}
+        {/* 2-команда */}
         <div className="play-area area-orange">
           <div className="question">{prob2.q}</div>
           <div className="screen">{team2Input}</div>
           <Numpad team={2} />
         </div>
 
-        {/* Правая дорожка */}
+        {/* Оң дорожка */}
         <div className="track" ref={rightTrackRef}>
           <div className="finish-line" />
           <div className="horse" style={{ bottom: calculateBottomPx(roundScores.team2, 2) }}>
-            <span className="horse-label" style={{ color: "#f97316" }}>4-класс</span>
+            <span className="horse-label" style={{ color: "#f97316" }}>
+              4-класс
+            </span>
             🏇
           </div>
         </div>
 
-        {/* Финальная модалка */}
+        {/* Финалдык модалка */}
         {timeLeft === 0 && (
           <div className="modal-overlay">
             <div className="modal">

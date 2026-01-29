@@ -12,9 +12,9 @@ type Team = 1 | 2;
 
 type Question = {
   points: number;
-  src: string;     // текст или картинка
-  answer: string;  // текст или картинка
-  text?: string;   // доп текст, если src-картинка
+  src: string; // текст или картинка
+  answer: string; // текст или картинка
+  text?: string; // доп текст, если src-картинка
 };
 
 type QuestionsData = Record<string, Question[]>;
@@ -22,33 +22,173 @@ type QuestionsData = Record<string, Question[]>;
 const TOTAL_TIME = 120;
 
 const questionsData: QuestionsData = {
-  "Макалдар": [
-    { points: 200, src: "/images/makal200.png", answer: "Жети өлчөп бир кес" },
-    { points: 400, src: "/images/makal400.png", answer: "Кыздын кырк чачы улуу" },
-    { points: 600, src: "/images/makal600.png", answer: "Бир күнү уруш болгон үйдөн кырк күн береке кетет" },
-    { points: 800, src: "/images/makal800.png", answer: "Эки жакшы тоого чыкса кудалашып түшөт, Эки жаман тоого чыкса кубалашып түшөт" },
-    { points: 1000, src: "/images/makal1000.png", answer: "Аскар аскар аскар тоо, аягы барып чат болот. Атадан алтоо болсо да, сыйлашпаса жат болот" },
+  Логика: [
+    {
+      points: 100,
+      src: "Адамдар кайсы курт-кумурсканы колго үйрөтүшкөн?",
+      answer: "Бал аары",
+    },
+    {
+      points: 200,
+      src: "Эң чоң казанга эмне батпайт?",
+      answer: "Өзүнүн капкагы",
+    },
+    {
+      points: 300,
+      src: "Короз өзүн канаттуу дей алабы?",
+      answer: "Жок, себеби сүйлөй албайт",
+    },
+    {
+      points: 400,
+      src: "Кандай идиштен эч нерсе жегенге болбойт?",
+      answer: "Бош идиштен",
+    },
+    {
+      points: 500,
+      src: "Эки ата, эки бала үч апельсинди тең бөлүштү. Бул кандайча?",
+      answer: "Чоң ата, ата жана бала",
+    },
+    {
+      points: 600,
+      src: "Топту кайра өзүңө кайтып келгидей кылып кантип ыргытса болот?",
+      answer: "Жогору карай ыргытса",
+    },
+    {
+      points: 700,
+      src: "Кайсы суроого дайыма «ооба» деп жооп берилет?",
+      answer: "Сен уктап жатасыңбы?",
+    },
   ],
-  "Логика": [
-    { points: 200, src: "Өрдөк = 3, ит = 3, эчки = 2, ал эми балык = 0. Ал эми мышык канчага барабар? Эмне үчүн?", answer: "3, себеби мяу сөзүндө 3 тамга бар" },
-    { points: 400, src: "Суу сактагычтагы суунун деңгээли күн сайын эки эсеге көбөйүп турат. Суу сактагыч толушу үчүн 60 күн керектелет. Канча убакыттан кийин суу сактагыч жарымына чейин толот?", answer: "59 күн" },
-    { points: 600, src: "Келип чыккан сан 4төн чоң, 5тен кичине боло тургандай кылып 4 менен 5тин ортосуна белги койгула", answer: "4,5" },
-    { points: 800, src: "4 5 6 7 8 9 \n 61 52 63 94 46 ?", answer: "18" },
-    { points: 1000, src: "8 8 8 8 8 8 8 8 = 1000 боло тургандай кылып сандардын арасына + белгилерин коюп чыккыла", answer: "888 + 88 + 8 + 8 + 8 = 1000" },
+
+  Туюнтма: [
+    { points: 100, src: "9 менен 6нын көбөйтүндүсүн тап", answer: "54" },
+    { points: 200, src: "8 менен 7нин суммасын тап", answer: "15" },
+    { points: 300, src: "50 менен 30дун айырмасын тап", answer: "20" },
+    { points: 400, src: "(458 + 482) : 2 туюнтмасын эсепте", answer: "470" },
+    { points: 500, src: "875 менен 683түн суммасын тап", answer: "1558" },
+    { points: 600, src: "365 + a, a = 485 болгондо мааниси", answer: "850" },
+    {
+      points: 700,
+      src: "536 кой жана андан 534кө аз эчки. Бардыгы канча?",
+      answer: "1070",
+    },
   ],
-  "Геометрия": [
-    { points: 200, src: "Трапецияда канча жуп параллель капталы бар? \n A)1 B)2 C)3 D)4", answer: "1" },
-    { points: 400, src: "Диагоналдары тең жана перпендикуляр кесилишкен төрт бурчтуу фигура кайсы? \n A)Квадрат B)Ромб C)Төрт бурчтуу D)Параллелограмм", answer: "Квадрат" },
-    { points: 600, src: "/images/moon.jpg", text: "Айды 2 түз сызык менен 6 бөлүккө бөлгүлө", answer: "/images/moon_answer.jpg" },
-    { points: 800, src: "/images/geometry.jpg", text: "Сүрөттө канча квадрат бар", answer: "14" },
-    { points: 1000, src: "/images/geometry1000.jpg", answer: "/images/geometry1000_answer.jpg" },
+
+  Геометрия: [
+    { points: 100, src: "Үч бурчтуктун канча жагы бар?", answer: "3" },
+    {
+      points: 200,
+      src: "Төрт үч бурчтукту кошсо канча бурч болот?",
+      answer: "12",
+    },
+    {
+      points: 300,
+      src: "Төрт бурчу бар фигура эмне деп аталат?",
+      answer: "Төрт бурчтук",
+    },
+    {
+      points: 400,
+      src: "Бал аарылар уясын кандай формада курушат?",
+      answer: "Алты бурчтук",
+    },
+    { points: 500, src: "Көп бурчтук ЭМЕС фигураны ата", answer: "Тегерек" },
+    {
+      points: 600,
+      src: "Кайсы фигуранын башы да, аягы да жок?",
+      answer: "Тегерек",
+    },
+    { points: 700, src: "Квадратта канча тең каптал бар?", answer: "4" },
   ],
-  "Ребустар": [
-    { points: 200, src: "/images/rebus200.png", answer: "Алгебра" },
-    { points: 400, src: "/images/rebus400.png", answer: "Транспортир" },
-    { points: 600, src: "/images/rebus600.png", answer: "Пифагор" },
-    { points: 800, src: "/images/rebus800.png", answer: "Периметр" },
-    { points: 1000, src: "/images/rebus1000.png", answer: "Масштаб" },
+
+  Макалдар: [
+    { points: 100, src: "7️⃣ 📏 1️⃣ ✂️", answer: "Жети өлчөп, бир кес" },
+    {
+      points: 200,
+      src: "🚶‍♂️🐐🐐🐐🐐🐐🗣️💣",
+      answer: "Айдаганы беш эчки, ышкырыгы таш жарат",
+    },
+    { points: 300, src: "⏳ 🕊️", answer: "Убакыт учкан куш" },
+    {
+      points: 400,
+      src: "💪1️⃣ 📚💪1000",
+      answer: "Билеги күчтүү бирди жыгат, билими күчтүү миңди жыгат",
+    },
+    { points: 500, src: "👀😨✋💪", answer: "Көз коркок, кол баатыр" },
+    { points: 600, src: "1000👂 1👀", answer: "Миң уккандан бир көргөн артык" },
+    { points: 700, src: "🎮🔥", answer: "Оюндан от чыгат" },
+  ],
+
+  Табышмактар: [
+    {
+      points: 100,
+      src: `Жылбай калат машина,
+Ылдамдык менде жатканда.
+Оозуң менден ачылат,
+Атымды менин айтканда
+Ким экенмин анда мен
+Кана балдар айткыла`,
+      answer: "0 саны",
+    },
+    {
+      points: 200,
+      src: `Мына быйыл мектепке,
+Биринчи жолу барамын.
+Апам абдан кубанып,
+Китеп,дептер аламын,
+Туура келген санды айт.
+Канча жашар баламын.`,
+      answer: "7",
+    },
+    {
+      points: 300,
+      src: `Жөө күлүктөр жарышса
+Маараларга келишет.
+Эң алдында келгенге,
+Мендей наамды беришет.
+Айткылачы атымды.
+Мен билейин тезирээк.`,
+      answer: "1",
+    },
+    {
+      points: 400,
+      src: `Кремлде жаркырап,
+Жанып турган жылдызмын.
+Канча болот чокусу,
+Кана айтчы сен туруп.
+Кубанайын мен дагы,
+Өз атымды так угуп.`,
+      answer: "5",
+    },
+    {
+      points: 500,
+      src: `Бутум менен турсам да,
+Башым менен турсам да.
+Мааним менин өзгөрбөйт.
+Бир эле болот атым да.
+Кана сен да токтобой,
+Атымды ата тартынбай.`,
+      answer: "8",
+    },
+    {
+      points: 600,
+      src: `Улуттук оюн чынында,
+Кызык болот турбайбы.
+Сан менен дайым айтылчу.
+Оюнду ойноп жыргайлы.
+Кайсы сан экенин айткыла.
+Оюнду баштап турганда.`,
+      answer: "9",
+    },
+    {
+      points: 700,
+      src: `Бөдөнөнү куу Түлкү
+Басып жээр чагында,
+Амал менен айттырды,
+Мен куткаргам аны да.
+Айтчы атымды угайын,
+Ачылаар сенин оозуң да.`,
+      answer: "6",
+    },
   ],
 };
 
@@ -56,16 +196,25 @@ function isImagePath(str: unknown): str is string {
   if (typeof str !== "string") return false;
   const s = str.toLowerCase();
   const exts = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
-  return s.startsWith("/") || s.startsWith("http") || exts.some((e) => s.endsWith(e));
+  return (
+    s.startsWith("/") || s.startsWith("http") || exts.some((e) => s.endsWith(e))
+  );
 }
 
 function makeCardKey(category: string, points: number) {
   return `${category}|${points}`;
 }
 
-export default function QuizBoard({ gameState, setGameState, onComplete }: QuizBoardProps) {
+export default function QuizBoard({
+  gameState,
+  setGameState,
+  onComplete,
+}: QuizBoardProps) {
   const categories = useMemo(() => Object.keys(questionsData), []);
-  const usedSet = useMemo(() => new Set(gameState.completedQuizCards), [gameState.completedQuizCards]);
+  const usedSet = useMemo(
+    () => new Set(gameState.completedQuizCards),
+    [gameState.completedQuizCards],
+  );
 
   // ✅ очередь команд (программа сама определяет)
   const [currentTeam, setCurrentTeam] = useState<Team>(1);
@@ -186,7 +335,8 @@ export default function QuizBoard({ gameState, setGameState, onComplete }: QuizB
           <div className="qb-sub">
             <span className="qb-turn">Очередь: Команда {currentTeam}</span>
             <span className="qb-score">
-              Счёт: <b>{gameState.scores.team1}</b> — <b>{gameState.scores.team2}</b>
+              Счёт: <b>{gameState.scores.team1}</b> —{" "}
+              <b>{gameState.scores.team2}</b>
             </span>
           </div>
         </div>
@@ -233,8 +383,12 @@ export default function QuizBoard({ gameState, setGameState, onComplete }: QuizB
             <div className="qb-modal-head">
               <div className="qb-meta">
                 <div className="qb-meta-cat">{activeCategory}</div>
-                <div className="qb-meta-points">{activeQuestion.points} упай</div>
-                <div className="qb-meta-team">Азыркы команда: <b>Команда {currentTeam}</b></div>
+                <div className="qb-meta-points">
+                  {activeQuestion.points} упай
+                </div>
+                <div className="qb-meta-team">
+                  Азыркы команда: <b>Команда {currentTeam}</b>
+                </div>
               </div>
 
               <div className={`qb-timer ${timeLeft <= 10 ? "warning" : ""}`}>
@@ -246,8 +400,14 @@ export default function QuizBoard({ gameState, setGameState, onComplete }: QuizB
               <div className="qb-content">
                 {isImagePath(activeQuestion.src) ? (
                   <>
-                    <img className="qb-img" src={activeQuestion.src} alt="question" />
-                    {activeQuestion.text ? <div className="qb-text">{activeQuestion.text}</div> : null}
+                    <img
+                      className="qb-img"
+                      src={activeQuestion.src}
+                      alt="question"
+                    />
+                    {activeQuestion.text ? (
+                      <div className="qb-text">{activeQuestion.text}</div>
+                    ) : null}
                   </>
                 ) : (
                   <div className="qb-text pre">{activeQuestion.src}</div>
@@ -257,7 +417,11 @@ export default function QuizBoard({ gameState, setGameState, onComplete }: QuizB
               <div className="qb-content">
                 <div className="qb-answer-title">Жооп / Ответ:</div>
                 {isImagePath(activeQuestion.answer) ? (
-                  <img className="qb-img" src={activeQuestion.answer} alt="answer" />
+                  <img
+                    className="qb-img"
+                    src={activeQuestion.answer}
+                    alt="answer"
+                  />
                 ) : (
                   <div className="qb-text pre">{activeQuestion.answer}</div>
                 )}
@@ -267,10 +431,17 @@ export default function QuizBoard({ gameState, setGameState, onComplete }: QuizB
             <div className="qb-modal-actions">
               {!showAnswer ? (
                 <>
-                  <button className="qb-btn qb-btn-primary" onClick={onShowAnswerClick}>
+                  <button
+                    className="qb-btn qb-btn-primary"
+                    onClick={onShowAnswerClick}
+                  >
                     Жоопту көрсөтүү / Показать ответ
                   </button>
-                  <button className="qb-btn" onClick={markCorrect} title="Можно засчитать сразу (без показа ответа)">
+                  <button
+                    className="qb-btn"
+                    onClick={markCorrect}
+                    title="Можно засчитать сразу (без показа ответа)"
+                  >
                     ✅ Правильно (+{activeQuestion.points})
                   </button>
                   <button className="qb-btn qb-btn-wrong" onClick={markWrong}>
@@ -279,7 +450,10 @@ export default function QuizBoard({ gameState, setGameState, onComplete }: QuizB
                 </>
               ) : (
                 <>
-                  <button className="qb-btn qb-btn-correct" onClick={markCorrect}>
+                  <button
+                    className="qb-btn qb-btn-correct"
+                    onClick={markCorrect}
+                  >
                     ✅ Правильно (+{activeQuestion.points})
                   </button>
                   <button className="qb-btn qb-btn-wrong" onClick={markWrong}>

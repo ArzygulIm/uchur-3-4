@@ -235,19 +235,19 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
     const s1 = finalRoundScores ? finalRoundScores.team1 : roundScores.team1;
     const s2 = finalRoundScores ? finalRoundScores.team2 : roundScores.team2;
 
-    if (s1 > s2) return "🏆 Заезд выиграла Команда 1!";
-    if (s2 > s1) return "🏆 Заезд выиграла Команда 2!";
-    return "🤝 Ничья в заезде!";
+    if (s1 > s2) return "🏆 Бул жарышта 3-класстын окуучусу жеңди";
+    if (s2 > s1) return "🏆 Бул жарышта 4-класстын окуучусу жеңди";
+    return "🤝 Жарыш тең болду";
   }, [finalRoundScores, roundScores.team1, roundScores.team2]);
 
   const roundScoreText = useMemo(() => {
     const s1 = finalRoundScores ? finalRoundScores.team1 : roundScores.team1;
     const s2 = finalRoundScores ? finalRoundScores.team2 : roundScores.team2;
-    return `Очки заезда: ${s1} — ${s2}`;
+    return `Бул жарыштын баллы: ${s1} — ${s2}`;
   }, [finalRoundScores, roundScores.team1, roundScores.team2]);
 
   const totalScoreText = useMemo(() => {
-    return `Общий счёт: ${gameState.scores.team1} — ${gameState.scores.team2}`;
+    return `Жалпы балл: ${gameState.scores.team1} — ${gameState.scores.team2}`;
   }, [gameState.scores.team1, gameState.scores.team2]);
 
   /* ---------- След. ученики (новый заезд) ---------- */
@@ -311,7 +311,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
   return (
     <div className="game-outer">
       <div className="game-container">
-        {TIMER_ENABLED && <div className="timer-box">Время: {timeLeft}</div>}
+        {TIMER_ENABLED && <div className="timer-box">Убакыт: {timeLeft}</div>}
 
         {!raceStarted && (
           <button
@@ -326,7 +326,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
         <div className="track" ref={leftTrackRef}>
           <div className="finish-line" />
           <div className="horse" style={{ bottom: calculateBottomPx(roundScores.team1, 1) }}>
-            <span className="horse-label" style={{ color: "#3b82f6" }}>Team 1</span>
+            <span className="horse-label" style={{ color: "#3b82f6" }}>3-класс</span>
             🐎
           </div>
         </div>
@@ -349,7 +349,7 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
         <div className="track" ref={rightTrackRef}>
           <div className="finish-line" />
           <div className="horse" style={{ bottom: calculateBottomPx(roundScores.team2, 2) }}>
-            <span className="horse-label" style={{ color: "#f97316" }}>Team 2</span>
+            <span className="horse-label" style={{ color: "#f97316" }}>4-класс</span>
             🏇
           </div>
         </div>
@@ -365,10 +365,10 @@ const AtChabysh: React.FC<AtChabyshProps> = ({ gameState, setGameState, onComple
 
               <div className="modal-actions">
                 <button onClick={nextStudents} className="btn modal-btn">
-                  След. ученики
+                  Кийинки окуучулар
                 </button>
                 <button onClick={onComplete} className="btn btn-ok modal-btn">
-                  Далее
+                  Кийинки раунд
                 </button>
               </div>
             </div>

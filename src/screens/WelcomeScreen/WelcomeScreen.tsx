@@ -13,7 +13,7 @@ export default function WelcomeScreen({ onNext }: { onNext: () => void }) {
         {/* Можно добавить картинку в public/screens/welcome.png */}
         <img className="ws-img" src="/screens/welcome.png" alt="" />
 
-        <button className="ws-btn" onClick={onNext}>Далее</button>
+        <button className="ws-btn" onClick={onNext}>Кийинки</button>
       </div>
     </div>
   );

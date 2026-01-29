@@ -97,17 +97,17 @@ function App() {
       {/* ✅ Header — всегда сверху, но внутри общего layout */}
       <div className="app-header">
         <div className="app-header-left">
-          <div className="app-title">Quiz Game</div>
+          <div className="app-title">Викторина</div>
 
           <div className="app-mini-score">
-            <span>Команда 1: <b>{gameState.scores.team1}</b></span>
+            <span>3-класс <b>{gameState.scores.team1}</b></span>
             <span className="dash">—</span>
-            <span>Команда 2: <b>{gameState.scores.team2}</b></span>
+            <span>4-класс <b>{gameState.scores.team2}</b></span>
           </div>
         </div>
 
         <button className="app-reset-btn" onClick={confirmReset}>
-          ↻ Сброс
+          ↻ Башынан баштоо
         </button>
       </div>
 
@@ -130,7 +130,7 @@ function App() {
           <div className="center-wrap">
             <RoundIntro
               title="Раунд 1"
-              subtitle="Ат чабыш • Умножение/деление"
+              subtitle="Ат чабыш • Көбөйтүү/бөлүү"
               imageSrc="/screens/atchabysh.png"
               onStart={goNext}
             />
@@ -141,7 +141,7 @@ function App() {
           <div className="center-wrap">
             <RoundIntro
               title="Раунд 2"
-              subtitle="Тест • Кто быстрее ответит"
+              subtitle="Тест • Ким шамдагай"
               imageSrc="/screens/test.png"
               onStart={goNext}
             />
@@ -152,7 +152,7 @@ function App() {
           <div className="center-wrap">
             <RoundIntro
               title="Раунд 3"
-              subtitle="Викторина • Табло"
+              subtitle="Викторина"
               imageSrc="/screens/quizboard.png"
               onStart={goNext}
             />

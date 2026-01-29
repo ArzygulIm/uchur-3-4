@@ -21,7 +21,7 @@ export default function RoundIntro({
         {imageSrc ? <img className="ri-img" src={imageSrc} alt="" /> : null}
 
         <button className="ri-btn" onClick={onStart}>
-          Начать
+          Баштоо
         </button>
       </div>
     </div>

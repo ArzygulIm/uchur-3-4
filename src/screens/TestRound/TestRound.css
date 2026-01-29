@@ -78,3 +78,18 @@
   font-size: 20px;
   font-weight: 700;
 }
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111827;
+  color: white;
+}
+
+/* СҮРӨТ */
+.opt-img {
+  width: min(18vw, 180px); /* экранга жараша */
+  height: min(18vw, 180px); /* дайыма квадрат */
+  object-fit: contain; /* сүрөт кесилбейт */
+}

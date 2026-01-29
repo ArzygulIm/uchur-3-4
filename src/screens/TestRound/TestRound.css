@@ -92,4 +92,5 @@
   width: min(18vw, 180px); /* экранга жараша */
   height: min(18vw, 180px); /* дайыма квадрат */
   object-fit: contain; /* сүрөт кесилбейт */
+  background-color: white;
 }

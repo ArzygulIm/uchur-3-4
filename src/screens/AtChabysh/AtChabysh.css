@@ -1,0 +1,297 @@
+/* AtChabysh.css */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+/* ВНЕШНЯЯ РАМКА - гарантированно по экрану */
+.game-outer {
+  position: fixed;
+  inset: 0;               /* top:0 right:0 bottom:0 left:0 */
+  padding: 32px 24px;     /* ✅ воздух сверху/снизу/по бокам */
+  background: #0f172a;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 999;           /* чтобы не "съедалось" родителем */
+}
+
+/* ВНУТРЕННИЙ КОНТЕЙНЕР */
+.game-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr 120px;
+  gap: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* Дорожки */
+.track {
+  background: #1e293b;
+  position: relative;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Линия СТАРТ */
+.track::after {
+  content: "СТАРТ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* <- START_ZONE_H */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  font-size: 14px;
+  font-weight: bold;
+  border-top: 2px dashed #334155;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Финиш */
+.finish-line {
+  position: absolute;
+  top: 60px; /* <- FINISH_TOP */
+  width: 100%;
+  height: 20px; /* <- FINISH_H */
+  background: repeating-linear-gradient(45deg, #fff, #fff 10px, #000 10px, #000 20px);
+  z-index: 2;
+}
+
+/* Лошадка */
+.horse {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 55px;
+  transition: bottom 0.6s cubic-bezier(0.1, 0.5, 0.1, 1);
+  z-index: 10;
+  width: 100%;
+  text-align: center;
+  /* bottom приходит из React */
+}
+
+.horse-label {
+  font-size: 12px;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #1e293b;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+/* Игровые зоны */
+.play-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 30px;
+  padding: 15px;
+  height: 100%;
+  min-height: 0;
+}
+
+.area-blue {
+  background: #3b82f6;
+  color: white;
+}
+
+.area-orange {
+  background: #f97316;
+  color: white;
+}
+
+.question {
+  font-size: 8vh;
+  font-weight: 900;
+  margin: 0;
+  text-align: center;
+}
+
+.screen {
+  width: 100%;
+  max-width: 320px;
+  height: 10vh;
+  background: white;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7vh;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+/* Нумпад */
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Кнопки */
+.btn {
+  height: 8vh;
+  background: #f8fafc;
+  border: none;
+  border-radius: 12px;
+  font-size: 3.5vh;
+  font-weight: bold;
+  box-shadow: 0 4px 0 #cbd5e1;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #1e293b; /* важно: чтобы цифры не были белыми */
+  user-select: none;
+}
+
+.btn:hover {
+  filter: brightness(0.98);
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #cbd5e1;
+}
+
+.btn-ok {
+  grid-column: span 2;
+  background: #22c55e;
+  color: white;
+  box-shadow: 0 4px 0 #15803d;
+}
+
+.btn-del {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 4px 0 #991b1b;
+}
+
+/* Таймер */
+.timer-box {
+  position: absolute;
+  top: 10px; /* теперь учитывает внешний паддинг .game-outer */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #ef4444;
+  padding: 8px 40px;
+  border-radius: 50px;
+  font-size: 3.5vh;
+  font-weight: 900;
+  z-index: 100;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопка старта */
+.start-btn {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 40px;
+  font-size: 26px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 200;
+  border: none;
+}
+
+/* Модалка */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: min(760px, 92vw);
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+  font-size: 42px;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+}
+
+.modal-text {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.modal-btn {
+  padding: 14px 26px;
+  font-size: 22px;
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+  .game-outer {
+    padding: 12px;
+  }
+
+  .game-container {
+    grid-template-columns: 90px 1fr 1fr 90px;
+    gap: 10px;
+  }
+
+  .question {
+    font-size: 6vh;
+  }
+
+  .btn {
+    height: 7vh;
+    font-size: 3vh;
+  }
+
+  .screen {
+    height: 9vh;
+    font-size: 6vh;
+  }
+}

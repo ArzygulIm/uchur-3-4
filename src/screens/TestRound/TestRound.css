@@ -1,0 +1,80 @@
+.test-outer {
+  position: fixed;
+  inset: 0;
+  background: #0f172a;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.test-question {
+  font-size: 48px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+}
+
+.test-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.team-panel {
+  border-radius: 28px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.3s ease;
+}
+
+.team-panel.blue {
+  background: #3b82f6;
+}
+
+.team-panel.orange {
+  background: #f97316;
+}
+
+.team-panel.win {
+  background: #22c55e !important;
+}
+
+.team-title {
+  background: white;
+  color: #0f172a;
+  padding: 6px 14px;
+  border-radius: 12px;
+  width: fit-content;
+  font-weight: 900;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.options button {
+  font-size: 36px;
+  font-weight: 900;
+  padding: 18px;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.options button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.progress {
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 20px;
+  font-weight: 700;
+}

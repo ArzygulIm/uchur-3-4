@@ -1,0 +1,32 @@
+.ri-wrap{
+  min-height: calc(100vh - 80px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ri-card{
+  width: min(900px, 96vw);
+  background:#0f172a;
+  color:white;
+  border-radius:24px;
+  padding:26px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+.ri-title{ font-size:56px; font-weight:900; margin:0 0 8px; }
+.ri-sub{ font-size:20px; font-weight:800; opacity:0.9; margin:0 0 16px; }
+.ri-img{
+  width:100%;
+  max-height:320px;
+  object-fit:contain;
+  border-radius:18px;
+  background: rgba(255,255,255,0.06);
+  margin-bottom:16px;
+}
+.ri-btn{
+  border:none; border-radius:18px;
+  padding:16px 26px;
+  font-size:22px; font-weight:900;
+  cursor:pointer;
+  background:#22c55e; color:white;
+}

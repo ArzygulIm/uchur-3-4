@@ -1,0 +1,33 @@
+.ws-wrap{
+  min-height: calc(100vh - 80px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.ws-card{
+  width: min(900px, 96vw);
+  background:#0f172a;
+  color:white;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  text-align:center;
+}
+.ws-title{ font-size:44px; font-weight:900; margin:0 0 14px; }
+.ws-text{ font-size:20px; font-weight:700; opacity:0.9; margin:0 0 18px; }
+.ws-img{
+  width:min(700px, 92vw);
+  max-height:320px;
+  object-fit:contain;
+  border-radius:18px;
+  margin: 0 auto 18px;
+  display:block;
+  background: rgba(255,255,255,0.05);
+}
+.ws-btn{
+  border:none; border-radius:16px;
+  padding:14px 22px;
+  font-size:18px; font-weight:900;
+  cursor:pointer;
+  background:#22c55e; color:white;
+}

@@ -44,17 +44,27 @@
   color:white;
 }
 
+/* BOARD */
 .qb-board{
   display:flex;
   flex-direction:column;
   gap: 12px;
+
+  /* ✅ мобил/кичине экранда 1 сап бузулбайт */
+  overflow-x: auto;
+  padding-bottom: 6px;
 }
 
+/* ✅ 1 категория + 7 балл = 1 строка */
 .qb-row{
   display:grid;
-  grid-template-columns: 180px repeat(5, 1fr);
+  grid-template-columns: 180px repeat(7, 1fr);
   gap: 10px;
   align-items: stretch;
+
+  /* ✅ сапты узун кылып, скроллга мүмкүнчүлүк берет */
+  width: max-content;
+  min-width: 100%;
 }
 
 .qb-cat{
@@ -66,6 +76,7 @@
   align-items:center;
   justify-content:center;
   text-align:center;
+  min-height: 56px;
 }
 
 .qb-card{
@@ -78,6 +89,7 @@
   background:#f8fafc;
   color:#0f172a;
   box-shadow: 0 5px 0 rgba(0,0,0,0.25);
+  min-height: 56px;
 }
 
 .qb-card:active{
@@ -160,13 +172,14 @@
   min-height: 240px;
   display:flex;
   flex-direction:column;
-  gap: 10px;
+  gap: 12px;
   align-items:center;
   justify-content:center;
 }
 
+/* ✅ сүрөт адаптив: чоң да эмес, кичине да эмес */
 .qb-img{
-  max-width: 100%;
+  max-width: min(100%, 560px);
   max-height: 420px;
   border-radius: 14px;
   object-fit: contain;
@@ -209,10 +222,38 @@
 
 /* Adaptive */
 @media (max-width: 900px){
+  /* ❌ мурда бул жерде 1 колонкага түшүп кетчү — алып салдык */
   .qb-row{
-    grid-template-columns: 1fr;
+    grid-template-columns: 160px repeat(7, 120px);
+    width: max-content;
   }
+
+  .qb-cat{
+    padding: 12px;
+    font-size: 16px;
+  }
+
   .qb-card{
-    padding: 14px;
+    padding: 12px 0;
+    font-size: 18px;
+    min-height: 52px;
+  }
+
+  .qb-modal{
+    width: min(920px, 98vw);
+  }
+
+  .qb-timer{
+    font-size: 22px;
+    min-width: 96px;
+    padding: 8px 12px;
+  }
+
+  .qb-text{
+    font-size: 18px;
+  }
+
+  .qb-img{
+    max-height: 320px;
   }
 }

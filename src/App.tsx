@@ -100,9 +100,9 @@ function App() {
           <div className="app-title">Викторина</div>
 
           <div className="app-mini-score">
-            <span>3-класс <b>{gameState.scores.team1}</b></span>
+            <span>1 - топ <b>{gameState.scores.team1}</b></span>
             <span className="dash">—</span>
-            <span>4-класс <b>{gameState.scores.team2}</b></span>
+            <span>2 - топ <b>{gameState.scores.team2}</b></span>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { GameState } from "../../App";
 import "./AtChabysh.css";
 
@@ -17,7 +17,6 @@ const TIMER_ENABLED = true;
 type Scores = { team1: number; team2: number };
 
 // === ДОЛЖНО СОВПАДАТЬ С CSS ===
-const START_ZONE_H = 60; // .track::after height (не используется в расчёте, просто для понимания)
 const FINISH_TOP = 60;   // .finish-line { top: 60px }
 const FINISH_H = 20;     // .finish-line height
 
